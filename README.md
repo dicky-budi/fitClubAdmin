@@ -1,5 +1,3 @@
-# fitClubAdmin
-
 # Create An Awesome Website With Fastify
 
 [Create An Awesome Website With Fastify - Getting Started](https://www.youtube.com/watch?v=_X-pjh4Vd10)
