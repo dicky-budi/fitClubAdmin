@@ -6,13 +6,26 @@ async function axiosPost(url,data,option = '') {
     });;
 }
 
-async function axiosGet(url,data,option = '') {
+async function axiosGet(url,data,option = '',todo) {
     axios.get(url,data,option).then((response) => {
         console.log(response);
+        if(todo != undefined && todo != null ){
+            todo();
+        }
         return response;
     }, (error) => {
         console.log(error);
     });;
+}
+
+async function axiosGetFile(url,todo) {
+    return new Promise(async function (resolve, reject) {
+        axios.get(url).then((response) => {
+            resolve(response.data);
+        }, (error) => {
+            reject(error);
+        });;
+    });
 }
 
 function axiosRedirect(url) {

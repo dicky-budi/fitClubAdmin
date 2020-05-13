@@ -40,6 +40,18 @@ fastify.get('/:origin', async function (req, reply) {
     case 'index':
       reply.sendFile('layouts/index.html');
       break;
+    case 'dashboard':
+      reply.sendFile('layouts/dashboard/dashboard.html');
+      break;
+    case 'schedule':
+      reply.sendFile('layouts/schedule/scheduleList.html');
+      break;
+    case 'employee':
+      reply.sendFile('layouts/employee/employeeList.html');
+      break;
+    case 'attendance':
+      reply.sendFile('layouts/attendance/attendanceList.html');
+      break;
     default:
       break;
   }

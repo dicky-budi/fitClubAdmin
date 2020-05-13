@@ -1,0 +1,4 @@
+.group { display: table; width: 100%; font-size: larger; padding-top: 10px; padding-bottom: 10px; }
+.item { display: table-cell; }
+.text { white-space: nowrap; width: 1%; padding: 0 10px; }
+.line { border-bottom: 1px solid #000; position: relative; top: -.5em; }
