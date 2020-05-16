@@ -2,3 +2,14 @@
 .item { display: table-cell; }
 .text { white-space: nowrap; width: 1%; padding: 0 10px; }
 .line { border-bottom: 1px solid #000; position: relative; top: -.5em; }
+
+
+.contentPlace {
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+.contentPlace::-webkit-scrollbar { /* WebKit */
+    width: 0;
+    height: 0;
+}

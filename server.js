@@ -29,6 +29,8 @@ fastify.register(fastifyHelmet)
   });
 const io = require('socket.io')(fastify.server);
 
+var url = 'http://localhost:8888/ronaldSengkey/fitClub/api/v1';
+
 fastify.get('/:origin', async function (req, reply) {
   switch (req.params.origin){
     case '':
@@ -43,6 +45,9 @@ fastify.get('/:origin', async function (req, reply) {
     case 'dashboard':
       reply.sendFile('layouts/dashboard/dashboard.html');
       break;
+    case 'classPage':
+      reply.sendFile('layouts/class/classList.html');
+      break;
     case 'schedule':
       reply.sendFile('layouts/schedule/scheduleList.html');
       break;
@@ -56,6 +61,134 @@ fastify.get('/:origin', async function (req, reply) {
       break;
   }
 });
+
+fastify.post('/:origin', async function (req, reply) {
+  var redirectUrl = url + '/' + req.params.origin;
+  var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": redirectUrl,
+      "method": "POST",
+      "headers": {
+          "Content-Type": "application/json",
+          "Accept": "*/*",
+          "Cache-Control": "no-cache",
+      },
+      "processData": false,
+      "body":JSON.stringify(req.body),
+  }
+  try {
+    let a = await actionPost(settings);
+    reply.send(a);
+  } catch (err) {
+    reply.send(err)
+  }
+});
+
+fastify.get('/class/schedule', async function (req, reply){
+  var redirectUrl = url + req.raw.url + '/' + req.headers.token
+  try{
+    let data = {
+      "async": true,
+      "crossDomain": true,
+      "url": redirectUrl,
+      "method": "GET",
+      "headers": {
+        "Accept": "*/*",
+        "Cache-Control": "no-cache",
+        "Content-type":'application/json'
+      }
+    }
+    let a = await actionGet(data);
+    reply.send(a);
+  }catch(err){
+    console.log("error apa", err);
+    reply.send(500);
+  }
+});
+
+fastify.get('/class', async function (req, reply){
+  var redirectUrl = url + req.raw.url + '/' + req.headers.token
+  try{
+    let data = {
+      "async": true,
+      "crossDomain": true,
+      "url": redirectUrl,
+      "method": "GET",
+      "headers": {
+        "Accept": "*/*",
+        "Cache-Control": "no-cache",
+        "Content-type":'application/json',
+        "param" : 'all'
+      }
+    }
+    let a = await actionGet(data);
+    reply.send(a);
+  }catch(err){
+    console.log("error apa", err);
+    reply.send(500);
+  }
+});
+
+fastify.get('/coachlist', async function (req, reply){
+  var redirectUrl = url + req.raw.url + '/' + req.headers.token
+  try{
+    let data = {
+      "async": true,
+      "crossDomain": true,
+      "url": redirectUrl,
+      "method": "GET",
+      "headers": {
+        "Accept": "*/*",
+        "Cache-Control": "no-cache",
+        "Content-type":'application/json'
+      }
+    }
+    let a = await actionGet(data);
+    reply.send(a);
+  }catch(err){
+    console.log("error apa", err);
+    reply.send(500);
+  }
+});
+
+function actionPost(data) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let settings = data;
+      r.post(settings, function (error, response, body) {
+        if (error) {
+          reject(500);
+        } else {
+          let result = JSON.parse(body);
+          resolve(result);
+        }
+      })
+    } catch (err) {
+      console.log("error action post", err);
+      reject(process.env.ERRORINTERNAL_RESPONSE);
+    }
+  })
+}
+
+function actionGet(data) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let settings = data;
+      r.get(settings, function (error, response, body) {
+        if (error) {
+          reject(process.env.ERRORINTERNAL_RESPONSE);
+        } else {
+          let result = JSON.parse(body);
+          resolve(result);
+        }
+      })
+    } catch (err) {
+      console.log("error action get", err);
+      reject(process.env.ERRORINTERNAL_RESPONSE);
+    }
+  })
+}
 
 
 const start = async () => {

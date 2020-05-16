@@ -13,6 +13,7 @@
             <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
             <link href="./public/assets/css/main.css" rel="stylesheet">
+            <link href="./public/assets/css/loading.css" rel="stylesheet">
 
             <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 
@@ -35,6 +36,7 @@
                     <ul>
                         <li class="selected dashboard"><a data-target="dashboard">Dashboard</a></li>
                         <li class="schedule"><a data-target="schedule">Schedule</a></li>
+                        <li class="classPage"><a data-target="classPage">Class</a></li>
                         <li class="employee"><a data-target="employee">Employee</a></li>
                         <li class="attendance"><a data-target="attendance">Attendance</a></li>
                     </ul>
@@ -44,9 +46,7 @@
                 <div class="nav-item has-sub toggle-hover" id="dropdown">
                     <a class="nav-dropdown-link">Menu</a>
                     <ul class="dropdown-menu dropdown-animated" role="menu">
-                        <li role="menu-item"><a href="#">First Item</a></li>
-                        <li role="menu-item"><a href="#">Second Item</a></li>
-                        <li role="menu-item"><a href="#">Third Item</a></li>
+                        <li role="menu-item"><a data-target="login">Logout</a></li>
                     </ul>
                 </div>
             </div>
@@ -64,5 +64,10 @@
 
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="./public/assets/js/axios.js"></script>
 <script src="./public/assets/js/main.js"></script>
+<script src="./public/assets/js/general.js"></script>
+<script src="./public/assets/js/schedule.js"></script>
+<script src="./public/assets/js/class.js"></script>
+<script src="./public/assets/js/employee.js"></script>
