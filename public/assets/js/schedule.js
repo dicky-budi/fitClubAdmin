@@ -3,11 +3,13 @@ async function processScheduleData(){
     var scheduleData = await axiosGet('class/schedule','',{
         'token': localStorage.getItem('token'),
     });
-    if(scheduleData.responseCode == '200'){
+    // jgn lupa diganti nanti if operatornya
+    if(scheduleData.responseCode != '200'){
         removeLoading('scheduleTable');
         appendScheduleTable(scheduleData.data);
     } else {
-        removeLoading('scheduleTable');
+        removeLoadingWithError('scheduleTable');
+        failedLoading('scheduleTable');
     }
 }
 

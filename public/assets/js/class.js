@@ -7,7 +7,8 @@ async function processClassData(){
         removeLoading('classTable');
         appendClassTable(classData.data);
     } else {
-        removeLoading('classTable');
+        removeLoadingWithError('classTable');
+        failedLoading('classTable');
     }
 }
 

@@ -3,7 +3,7 @@ $(document).on('click','.login', async function(){
     const email = $('#email').val();
     const password = $('#password').val();
     loadingButton('login');
-    var data = {
+    const data = {
         "email" : email,
         "password" : password
     }
@@ -14,11 +14,6 @@ $(document).on('click','.login', async function(){
         axiosRedirect('/index');
     } else{
         removeLoadingButton('login');
-        Swal.fire({
-            title: 'Error!',
-            text: 'Login Failed',
-            icon: 'error',
-            confirmButtonText: 'OK'
-        })
+        swalNotif('error','Login Failed');
     }
 });

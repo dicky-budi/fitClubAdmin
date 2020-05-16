@@ -3,14 +3,12 @@ const fastify = require('fastify')({
   logger: true
 })
 const path = require('path');
-// const rp = require('request-promise');
 const port = 8100;
 const r = require('request');
-const fs = require('fs');
-let serverKey = fs.readFileSync('./server.key', 'utf8');
-const Cryptr = require('cryptr');
-const request = require('request');
-const cryptr = new Cryptr(serverKey);
+// let serverKey = fs.readFileSync('./server.key', 'utf8');
+// const Cryptr = require('cryptr');
+// const request = require('request');
+// const cryptr = new Cryptr(serverKey);
 
 let fastifyHelmet = require('fastify-helmet');
 // Declare a route

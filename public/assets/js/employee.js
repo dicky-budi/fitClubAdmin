@@ -7,7 +7,8 @@ async function processCoachListData(){
         removeLoading('coachListTable');
         appendCoachListTable(classData.data);
     } else {
-        removeLoading('coachListTable');
+        removeLoadingWithError('coachListTable');
+        failedLoading('coachListTable');
     }
 }
 
