@@ -1,5 +1,11 @@
 
 var returnedHTML = '';
+
+$(function(){
+    if(localStorage.getItem('token') == undefined || localStorage.getItem('token') == null)
+        window.location.href = 'login';
+})
+
 $(document).on('click','a', async function(){
     switch($(this).data('target')){
         case "login":

@@ -1,4 +1,3 @@
-
 $(document).on('click','.login', async function(){
     const email = $('#email').val();
     const password = $('#password').val();
