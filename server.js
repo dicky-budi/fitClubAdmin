@@ -58,6 +58,12 @@ fastify.get('/:origin', async function (req, reply) {
     case 'scheduleForm':
       reply.sendFile('layouts/schedule/scheduleForm.html');
       break;
+    case 'switchSchedule':
+      reply.sendFile('layouts/schedule/switchSchedule.html');
+      break;
+    case 'addClass':
+      reply.sendFile('layouts/class/addClass.html');
+      break;
     default:
       break;
   }
@@ -86,6 +92,54 @@ fastify.post('/:origin', async function (req, reply) {
   }
 });
 
+fastify.post('/submitSchedule', async function (req, reply) {
+  var redirectUrl = url + '/coach/class/schedule/' + req.headers.token;
+  var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": redirectUrl,
+      "method": "POST",
+      "headers": {
+          "Content-Type": "application/json",
+          "Accept": "*/*",
+          "Cache-Control": "no-cache",
+      },
+      "processData": false,
+      "body":JSON.stringify(req.body),
+  }
+  console.log('set',settings);
+  try {
+    let a = await actionPost(settings);
+    reply.send(a);
+  } catch (err) {
+    reply.send(err)
+  }
+});
+
+fastify.put('/switchSchedule', async function (req, reply) {
+  var redirectUrl = url + '/coach/switchClass/' + req.headers.token;
+  var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": redirectUrl,
+      "method": "POST",
+      "headers": {
+          "Content-Type": "application/json",
+          "Accept": "*/*",
+          "Cache-Control": "no-cache",
+      },
+      "processData": false,
+      "body":JSON.stringify(req.body),
+  }
+  console.log('set',settings);
+  try {
+    let a = await actionPut(settings);
+    reply.send(a);
+  } catch (err) {
+    reply.send(err)
+  }
+});
+
 fastify.get('/class/schedule', async function (req, reply){
   var redirectUrl = url + req.raw.url + '/' + req.headers.token
   try{
@@ -98,6 +152,74 @@ fastify.get('/class/schedule', async function (req, reply){
         "Accept": "*/*",
         "Cache-Control": "no-cache",
         "Content-type":'application/json'
+      }
+    }
+    let a = await actionGet(data);
+    reply.send(a);
+  }catch(err){
+    console.log("error apa", err);
+    reply.send(500);
+  }
+});
+
+fastify.get('/classList', async function (req, reply){
+  var redirectUrl = url + req.raw.url + '/' + req.headers.token
+  try{
+    let data = {
+      "async": true,
+      "crossDomain": true,
+      "url": redirectUrl,
+      "method": "GET",
+      "headers": {
+        "Accept": "*/*",
+        "Cache-Control": "no-cache",
+        "Content-type":'application/json',
+        "param": "all"
+      }
+    }
+    let a = await actionGet(data);
+    reply.send(a);
+  }catch(err){
+    console.log("error apa", err);
+    reply.send(500);
+  }
+});
+
+fastify.get('/place', async function (req, reply){
+  var redirectUrl = url + req.raw.url + '/' + req.headers.token
+  try{
+    let data = {
+      "async": true,
+      "crossDomain": true,
+      "url": redirectUrl,
+      "method": "GET",
+      "headers": {
+        "Accept": "*/*",
+        "Cache-Control": "no-cache",
+        "Content-type":'application/json'
+      }
+    }
+    let a = await actionGet(data);
+    reply.send(a);
+  }catch(err){
+    console.log("error apa", err);
+    reply.send(500);
+  }
+});
+
+fastify.get('/coach/class/schedule', async function (req, reply){
+  var redirectUrl = url + req.raw.url + '/' + req.headers.token
+  try{
+    let data = {
+      "async": true,
+      "crossDomain": true,
+      "url": redirectUrl,
+      "method": "GET",
+      "headers": {
+        "Accept": "*/*",
+        "Cache-Control": "no-cache",
+        "Content-type":'application/json',
+        "filter" : "all"
       }
     }
     let a = await actionGet(data);
@@ -152,6 +274,25 @@ fastify.get('/coachlist', async function (req, reply){
     reply.send(500);
   }
 });
+
+function actionPut(data) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let settings = data;
+      r.put(settings, function (error, response, body) {
+        if (error) {
+          reject(500);
+        } else {
+          let result = JSON.parse(body);
+          resolve(result);
+        }
+      })
+    } catch (err) {
+      console.log("error action post", err);
+      reject(process.env.ERRORINTERNAL_RESPONSE);
+    }
+  })
+}
 
 function actionPost(data) {
   return new Promise(async (resolve, reject) => {

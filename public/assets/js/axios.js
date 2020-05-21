@@ -13,6 +13,21 @@ async function axiosPost(url,data,option = '') {
     });
 }
 
+async function axiosPut(url,data,option = '') {
+    return new Promise(async function (resolve, reject) {
+        axios({
+            method: 'put',
+            url: url,
+            data: data,
+            headers: option
+        }).then((response) => {
+            resolve(response.data);
+        }, (error) => {
+            reject(error);
+        });
+    });
+}
+
 async function axiosGet(url,data,option = '') {
     return new Promise(async function (resolve, reject) {
         axios({

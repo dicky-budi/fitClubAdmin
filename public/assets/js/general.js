@@ -1,4 +1,18 @@
 const loadingTag = '<div class="sk-folding-cube"><div class="sk-cube1 sk-cube"></div><div class="sk-cube2 sk-cube"></div><div class="sk-cube4 sk-cube"></div><div class="sk-cube3 sk-cube"></div></div>'
+const modal = '<section class="modalSection">'+
+'<div class="modal modal-large modal-animated--zoom-in" id="modals">'+
+    '<a href="#" class="modal-overlay close-btn formOverlay" aria-label="Close"></a>'+
+    '<div class="modal-content" role="document">'+
+        '<div class="modal-header">'+
+            '<a href="#" class="u-pull-right closeHeader" aria-label="Close"><span class="icon"><i class="fa fa-wrapper fa-times"></i></span></a>'+
+            '<div class="modal-title"></div>'+
+        '</div>'+
+        '<div class="modal-body">'+
+        '</div>'+
+    '</div>'+
+'</div>'+
+'</section>';
+
 
 function applyTimePicker(idname){
     $('#'+idname).timepicker({ 'scrollDefault': 'now','timeFormat': 'h:i A',
@@ -7,6 +21,18 @@ function applyTimePicker(idname){
             ['1:00 AM', '7:00 AM']
         ] 
     });
+}
+
+function clearModal(){
+    $('.modal-title').html('');
+    $('.modal-body').empty();
+    $('.modal-body').html('');
+}
+
+function clearModalSwitch(){
+    $('.modal-title-switch').html('');
+    $('.modal-body-switch').empty();
+    $('.modal-body-switch').html('');
 }
 
 function applyDataTable(classname){
@@ -77,6 +103,12 @@ function clearAndReplaceContent(tag,target){
     $('.contentPlace').html(tag);
 }
 
+function clearAndReplaceContentData(tag){
+    $('.contentPlace').empty();
+    $('.contentPlace').html('');
+    $('.contentPlace').html(tag);
+}
+
 function addSectionPadding(padding = ''){
     $('.contentPlace').children().each(function () {
         if(padding == '')
@@ -93,7 +125,7 @@ function loadingButtonWithDisabledForm(classname,text='',formId){
         $('.'+classname).text(text);
     $('.'+classname).addClass('animated loading u-center loading-left');
     $('.'+classname).css('margin-bottom','1rem');
-    $(formId).find('input , select').each(function(e){
+    $(formId).find('input , select, textarea').each(function(e){
         $(this).attr('disabled',true);
     })
     $('.formOverlay').removeAttr('href');
@@ -103,7 +135,7 @@ function loadingButtonWithDisabledForm(classname,text='',formId){
 function removeButtonWithDisabledForm(classname,text='',formId){
     $('.'+classname).text(text);
     $('.'+classname).removeClass('animated loading u-center loading-left');
-    $(formId).find('input , select').each(function(e){
+    $(formId).find('input , select, textarea').each(function(e){
         $(this).attr('disabled',false);
     })
     $('.formOverlay').attr('href','#target');

@@ -1,3 +1,20 @@
+$(document).on('click','.addClass', async function(){
+    $(modal).insertAfter('.section');
+    var addModal = await axiosGetFile('/addClass');
+    $('.modal-title').html('Add Class');
+    $('.modal-body').append(addModal);
+});
+
+$(document).on('click','.submitClass', async function(){
+    loadingButtonWithDisabledForm('submitClass','LOADING...','.formClass');
+    var name = $('.classNameNew').val();
+    var description = $('.descriptionText').val();
+    
+    setTimeout(() => {
+        removeButtonWithDisabledForm('submitClass','Add New Class','.formClass')
+    }, 3000);
+});
+
 async function processClassData(classname){
     appendLoading(classname);
     var classData = await axiosGet('class','',{

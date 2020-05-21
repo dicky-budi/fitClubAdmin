@@ -1,19 +1,43 @@
 <section class="formSchedule">
     <div class="row u-no-padding">
-        <div class="form-section">
-            <label class="font-bold">Class name</label>
+        <div class="form-section" style="width: 100%;">
+            <label class="font-bold">Class</label>
                 <div class="col-12">
                     <div class="input-control">
-                        <input class="input-contains-icon-left input-small" type="text" placeholder="Class Name" />
-                        <span class="icon icon-left"><i class="fas fa-wrapper fa-calendar"></i></span>
+                        <select class="select classNameSchedule" id="classNameSchedule" name="classNameSchedule" placeholder="Choose Class">
+                            <!-- <option value="1" selected></option> -->
+                        </select>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <div class="row u-no-padding">
+        <div class="form-section" style="width: 100%;">
+            <label class="font-bold">Coach</label>
+                <div class="col-12">
+                    <div class="input-control">
+                        <select class="select coachNameSchedule" id="coachNameSchedule" name="coachNameSchedule" placeholder="Choose Coach">
+                            <!-- <option value="1" selected></option> -->
+                        </select>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <div class="row u-no-padding">
+        <div class="form-section">
+            <label class="font-bold">Start Date</label>
+                <div class="col-12">
+                    <div class="input-control">
+                        <input class="input-contains-icon-left input-small dateSchedule" type="date" name="dateSchedule" id="dateSchedule"/>
+                        <span class="icon icon-left"><i class="fas fa-wrapper fa-calendar-alt"></i></span>
                     </div>
                 </div>
         </div>
         <div class="form-section">
-            <label class="font-bold">Date</label>
+            <label class="font-bold">End Date</label>
                 <div class="col-12">
                     <div class="input-control">
-                        <input class="input-contains-icon-left input-small" type="date" placeholder="Class Name" />
+                        <input class="input-contains-icon-left input-small endDateSchedule" type="date" name="endDateSchedule" id="endDateSchedule"/>
                         <span class="icon icon-left"><i class="fas fa-wrapper fa-calendar-alt"></i></span>
                     </div>
                 </div>
@@ -24,7 +48,7 @@
             <label class="font-bold">Start Time</label>
                 <div class="col-12">
                     <div class="input-control">
-                        <input class="input-contains-icon-left input-small" id="startTime" name="startTime" type="text"/>
+                        <input class="input-contains-icon-left input-small startTime" id="startTime" name="startTime" type="text"/>
                         <span class="icon icon-left"><i class="fas fa-wrapper fa-clock"></i></span>
                     </div>
                 </div>
@@ -35,7 +59,7 @@
             <label class="font-bold">End Time</label>
                 <div class="col-12">
                     <div class="input-control">
-                        <input class="input-contains-icon-left input-small" id="endTime" name="endTime" type="text" />
+                        <input class="input-contains-icon-left input-smal endTime" id="endTime" name="endTime" type="text" />
                         <span class="icon icon-left"><i class="fas fa-wrapper fa-clock"></i></span>
                     </div>
                 </div>
@@ -43,13 +67,11 @@
     </div>
     <div class="row u-no-padding">
         <div class="form-section" style="width: 100%;">
-            <label class="font-bold">Coach</label>
+            <label class="font-bold">Place</label>
                 <div class="col-12">
                     <div class="input-control">
-                        <select class="select" placeholder="Choose coach">
-                            <option>Joni</option>
-                            <option>Jono</option>
-                            <option>Jona</option>
+                        <select class="select placeNameSchedule" id="placeNameSchedule" name="placeNameSchedule" placeholder="Choose place">
+                            <!-- <option value="1" selected></option> -->
                         </select>
                     </div>
                 </div>
