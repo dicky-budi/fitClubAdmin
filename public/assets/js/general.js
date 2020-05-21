@@ -1,5 +1,18 @@
 const loadingTag = '<div class="sk-folding-cube"><div class="sk-cube1 sk-cube"></div><div class="sk-cube2 sk-cube"></div><div class="sk-cube4 sk-cube"></div><div class="sk-cube3 sk-cube"></div></div>'
 
+function applyDataTable(classname){
+    $('.'+classname).DataTable({
+        "responsive": true,
+        "searching": false,
+        "info" : false,
+        "paging": false,
+        "autoWidth": false,
+    });
+    $('.'+classname).parent().css('min-width','100%');
+    $('.dataTable thead').addClass('bg-warning-light');
+    $('.dataTable tfoot').addClass('bg-warning-light');
+}
+
 function appendLoading(classname){
     $(loadingTag).prependTo($('.'+classname));
     $('.'+classname).css('opacity','0.3');

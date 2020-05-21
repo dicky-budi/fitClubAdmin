@@ -1,14 +1,15 @@
-async function processClassData(){
-    appendLoading('classTable');
+async function processClassData(classname){
+    appendLoading(classname);
     var classData = await axiosGet('class','',{
         'token': localStorage.getItem('token'),
     });
     if(classData.responseCode == '200'){
-        removeLoading('classTable');
+        removeLoading(classname);
         appendClassTable(classData.data);
+        applyDataTable(classname);
     } else {
-        removeLoadingWithError('classTable');
-        failedLoading('classTable');
+        removeLoadingWithError(classname);
+        failedLoading(classname);
     }
 }
 

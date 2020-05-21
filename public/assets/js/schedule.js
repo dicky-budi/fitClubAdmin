@@ -1,15 +1,16 @@
-async function processScheduleData(){
-    appendLoading('scheduleTable');
+async function processScheduleData(classname){
+    appendLoading(classname);
     var scheduleData = await axiosGet('class/schedule','',{
         'token': localStorage.getItem('token'),
     });
     // jgn lupa diganti nanti if operatornya
     if(scheduleData.responseCode != '200'){
-        removeLoading('scheduleTable');
+        removeLoading(classname);
         appendScheduleTable(scheduleData.data);
+        applyDataTable(classname);
     } else {
-        removeLoadingWithError('scheduleTable');
-        failedLoading('scheduleTable');
+        removeLoadingWithError(classname);
+        failedLoading(classname);
     }
 }
 

@@ -20,19 +20,19 @@ $(document).on('click','a', async function(){
             returnedHTML = await axiosGetFile('/schedule');
             clearAndReplaceContent(returnedHTML,$(this).data('target'));
             addSectionPadding();
-            await processScheduleData();
+            await processScheduleData('scheduleTable');
             break;
         case "classPage":
             returnedHTML = await axiosGetFile('/classPage');
             clearAndReplaceContent(returnedHTML,$(this).data('target'));
             addSectionPadding();
-            await processClassData();
+            await processClassData('classTable');
             break;
         case "employee":
             returnedHTML = await axiosGetFile('/employee');
             clearAndReplaceContent(returnedHTML,$(this).data('target'));
             addSectionPadding('10px');
-            await processCoachListData();
+            await processCoachListData('coachListTable');
             break;
         case "attendance":
             returnedHTML = await axiosGetFile('/attendance');

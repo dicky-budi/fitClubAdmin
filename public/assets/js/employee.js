@@ -1,14 +1,15 @@
-async function processCoachListData(){
-    appendLoading('coachListTable');
+async function processCoachListData(classname){
+    appendLoading(classname);
     var classData = await axiosGet('coachlist','',{
         'token': localStorage.getItem('token'),
     });
     if(classData.responseCode == '200'){
-        removeLoading('coachListTable');
+        removeLoading(classname);
         appendCoachListTable(classData.data);
+        applyDataTable(classname);
     } else {
-        removeLoadingWithError('coachListTable');
-        failedLoading('coachListTable');
+        removeLoadingWithError(classname);
+        failedLoading(classname);
     }
 }
 
