@@ -1,5 +1,14 @@
 const loadingTag = '<div class="sk-folding-cube"><div class="sk-cube1 sk-cube"></div><div class="sk-cube2 sk-cube"></div><div class="sk-cube4 sk-cube"></div><div class="sk-cube3 sk-cube"></div></div>'
 
+function applyTimePicker(idname){
+    $('#'+idname).timepicker({ 'scrollDefault': 'now','timeFormat': 'h:i A',
+        'disableTimeRanges': [
+            ['9:00 PM', '11:59 PM'],
+            ['1:00 AM', '7:00 AM']
+        ] 
+    });
+}
+
 function applyDataTable(classname){
     $('.'+classname).DataTable({
         "responsive": true,
@@ -75,6 +84,30 @@ function addSectionPadding(padding = ''){
         else
             $(this).css('padding',padding);
     });
+}
+
+function loadingButtonWithDisabledForm(classname,text='',formId){
+    if(text == '')
+        $('.'+classname).text('loading');
+    else
+        $('.'+classname).text(text);
+    $('.'+classname).addClass('animated loading u-center loading-left');
+    $('.'+classname).css('margin-bottom','1rem');
+    $(formId).find('input , select').each(function(e){
+        $(this).attr('disabled',true);
+    })
+    $('.formOverlay').removeAttr('href');
+    $('.closeHeader').remove();
+}
+
+function removeButtonWithDisabledForm(classname,text='',formId){
+    $('.'+classname).text(text);
+    $('.'+classname).removeClass('animated loading u-center loading-left');
+    $(formId).find('input , select').each(function(e){
+        $(this).attr('disabled',false);
+    })
+    $('.formOverlay').attr('href','#target');
+    $('.modal-header').prepend('<a href="#components" class="u-pull-right closeHeader" aria-label="Close"><span class="icon"><i class="fa fa-wrapper fa-times"></i></span></a>');
 }
 
 function loadingButton(classname,text = ''){

@@ -55,6 +55,9 @@ fastify.get('/:origin', async function (req, reply) {
     case 'attendance':
       reply.sendFile('layouts/attendance/attendanceList.html');
       break;
+    case 'scheduleForm':
+      reply.sendFile('layouts/schedule/scheduleForm.html');
+      break;
     default:
       break;
   }
