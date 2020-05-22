@@ -34,9 +34,10 @@ $(document).on('click','a', async function(){
             addSectionPadding('10px');
             await processCoachListData('coachListTable');
             break;
-        case "attendance":
-            returnedHTML = await axiosGetFile('/attendance');
+        case "log":
+            returnedHTML = await axiosGetFile('/log');
             clearAndReplaceContent(returnedHTML,$(this).data('target'));
+            addSectionPadding();
             break;
     }
 });
