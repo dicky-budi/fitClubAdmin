@@ -27,6 +27,8 @@ $(document).on('click','.switchScheduleTag', async function(){
     var switchSchedule = await axiosGetFile('/switchSchedule');
     $('.modal-title').html('Switch Coach Schedule');
     $('.modal-body').append(switchSchedule);
+    $('.scheduleDataFrom').select2();
+    $('.scheduleDataTo').select2();
     getCoachSchedule.data.forEach(appendCoachSwitchSchedule);
 });
 
