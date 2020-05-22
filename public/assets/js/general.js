@@ -1,4 +1,4 @@
-const loadingTag = '<div class="sk-folding-cube"><div class="sk-cube1 sk-cube"></div><div class="sk-cube2 sk-cube"></div><div class="sk-cube4 sk-cube"></div><div class="sk-cube3 sk-cube"></div></div>'
+const loadingTag = '<div class="sk-folding-cube" style="z-index:99"><div class="sk-cube1 sk-cube"></div><div class="sk-cube2 sk-cube"></div><div class="sk-cube4 sk-cube"></div><div class="sk-cube3 sk-cube"></div></div>'
 const modal = '<section class="modalSection">'+
 '<div class="modal modal-large modal-animated--zoom-in" id="modals">'+
     '<a href="#" class="modal-overlay close-btn formOverlay" aria-label="Close"></a>'+
@@ -51,6 +51,7 @@ function applyDataTable(classname){
 function appendLoading(classname){
     $(loadingTag).prependTo($('.'+classname));
     $('.'+classname).css('opacity','0.3');
+    $('.'+classname).css('pointer-events','none');
 }
 
 function failedLoading(classname){
@@ -60,6 +61,7 @@ function failedLoading(classname){
 function removeLoading(classname){
     $('.sk-folding-cube').remove();
     $('.'+classname).css('opacity','1');
+    $('.'+classname).css('pointer-events','auto');
 }
 
 function removeLoadingWithError(classname){
@@ -109,12 +111,10 @@ function clearAndReplaceContentData(tag){
     $('.contentPlace').html(tag);
 }
 
-function addSectionPadding(padding = ''){
+function addSpace(){
     $('.contentPlace').children().each(function () {
-        if(padding == '')
-            $(this).css('padding','20px');
-        else
-            $(this).css('padding',padding);
+        if($(this).find('table').length == 0)
+            $(this).prepend('<space class="large"></space>')
     });
 }
 

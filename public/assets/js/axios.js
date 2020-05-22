@@ -6,7 +6,10 @@ async function axiosPost(url,data,option = '') {
             data: data,
             headers: option
         }).then((response) => {
-            resolve(response.data);
+            if(response.responseCode == '401')
+                window.location.href= 'login';
+            else 
+                resolve(response.data);
         }, (error) => {
             reject(error);
         });
@@ -21,7 +24,10 @@ async function axiosPut(url,data,option = '') {
             data: data,
             headers: option
         }).then((response) => {
-            resolve(response.data);
+            if(response.responseCode == '401')
+                window.location.href= 'login';
+            else 
+                resolve(response.data);
         }, (error) => {
             reject(error);
         });
@@ -36,7 +42,10 @@ async function axiosGet(url,data,option = '') {
             data: data,
             headers: option
         }).then((response) => {
-            resolve(response.data);
+            if(response.responseCode == '401')
+                window.location.href= 'login';
+            else 
+                resolve(response.data);
         }, (error) => {
             reject(error);
         });

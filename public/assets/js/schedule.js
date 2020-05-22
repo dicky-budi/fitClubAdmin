@@ -77,7 +77,7 @@ $(document).on('click','.submitSchedule', async function(){
 
         var returnedHTML = await axiosGetFile('/schedule');
         clearAndReplaceContent(returnedHTML,$(this).data('target'));
-        addSectionPadding();
+        addSpace();
         await processScheduleData('scheduleTable');
     } else{
         removeButtonWithDisabledForm('submitSchedule','Submit Schedule','.formSchedule')
@@ -108,7 +108,7 @@ $(document).on('click','.submitSwitchSchedule', async function(){
 
         var returnedHTML = await axiosGetFile('/schedule');
         clearAndReplaceContent(returnedHTML,$(this).data('target'));
-        addSectionPadding();
+        addSpace();
         await processScheduleData('scheduleTable');
     } else{
         removeButtonWithDisabledForm('submitSwitchSchedule','Switch Schedule','.switchSchedule')
