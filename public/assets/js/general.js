@@ -72,6 +72,7 @@ function removeLoadingWithError(classname){
         toast('error',splitted,classname);
     if($('.refreshButton').length == 0)
         addRefreshButton(classname);
+    $('.'+classname).css('pointer-events','auto');
 }
 
 function addRefreshButton(classname){
@@ -180,7 +181,13 @@ function storageClearAll(){
 $(document).on('click','.refreshButton', async function(){
     switch($(this).data('refresh')){
         case 'scheduleTable':
-            await processScheduleData();
+            await processScheduleData($(this).data('refresh'));
+            break;
+        case 'coachListTable':
+            await processCoachListData($(this).data('refresh'));
+            break;
+        case 'classTable':
+            await processClassData($(this).data('refresh'));
             break;
         default:
             break;
