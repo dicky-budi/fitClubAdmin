@@ -92,6 +92,29 @@ fastify.post('/:origin', async function (req, reply) {
   }
 });
 
+fastify.post('/submitClass', async function (req, reply) {
+  var redirectUrl = url + '/class/' + req.headers.token;
+  var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": redirectUrl,
+      "method": "POST",
+      "headers": {
+          "Content-Type": "application/json",
+          "Accept": "*/*",
+          "Cache-Control": "no-cache",
+      },
+      "processData": false,
+      "body":JSON.stringify(req.body),
+  }
+  try {
+    let a = await actionPost(settings);
+    reply.send(a);
+  } catch (err) {
+    reply.send(err)
+  }
+});
+
 fastify.post('/submitSchedule', async function (req, reply) {
   var redirectUrl = url + '/coach/class/schedule/' + req.headers.token;
   var settings = {

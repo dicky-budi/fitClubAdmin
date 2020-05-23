@@ -9,10 +9,26 @@ $(document).on('click','.submitClass', async function(){
     loadingButtonWithDisabledForm('submitClass','LOADING...','.formClass');
     var name = $('.classNameNew').val();
     var description = $('.descriptionText').val();
-    
-    setTimeout(() => {
-        removeButtonWithDisabledForm('submitClass','Add New Class','.formClass')
-    }, 3000);
+    var sendData = {
+        "className": name,
+        "description": description
+    };
+    var addClass = await axiosPost('submitClass',sendData,{
+        'token': localStorage.getItem('token'),
+    });
+    if(addClass.responseCode == '200'){
+        removeButtonWithDisabledForm('submitClass','Add New Class','.formClass');
+        $('.closeHeader').click();
+        swalNotif('success','Success create class');
+
+        returnedHTML = await axiosGetFile('/classPage');
+        clearAndReplaceContent(returnedHTML,$(this).data('target'));
+        addSpace();
+        await processClassData('classTable');
+    } else {
+        removeButtonWithDisabledForm('submitClass','Add New Class','.formClass');
+        swalNotif('error','Create Class Failed');
+    }
 });
 
 async function processClassData(classname){

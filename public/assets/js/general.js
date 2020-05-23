@@ -12,6 +12,7 @@ const modal = '<section class="modalSection">'+
     '</div>'+
 '</div>'+
 '</section>';
+const space = '<space class="large"></space>';
 
 
 function applyTimePicker(idname){
@@ -115,7 +116,7 @@ function clearAndReplaceContentData(tag){
 function addSpace(){
     $('.contentPlace').children().each(function () {
         if($(this).find('table').length == 0)
-            $(this).prepend('<space class="large"></space>')
+            $(this).prepend(space)
     });
 }
 

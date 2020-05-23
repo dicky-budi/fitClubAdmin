@@ -25,7 +25,7 @@ $(document).on('click','a', async function(){
         }
     } else {
         switch($(this).data('target')){
-            case "login":
+            case "logout":
                 storageClearAll();
                 returnedHTML = axiosRedirect('/login');
                 break;

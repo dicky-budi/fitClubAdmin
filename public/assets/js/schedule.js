@@ -116,9 +116,6 @@ $(document).on('click','.submitSwitchSchedule', async function(){
         removeButtonWithDisabledForm('submitSwitchSchedule','Switch Schedule','.switchSchedule')
         swalNotif('error','Switch Schedule Failed');
     }
-    // setTimeout(() => {
-    //     removeButtonWithDisabledForm('submitSwitchSchedule','Switch Schedule','.switchSchedule')
-    // }, 3000);
 });
 
 
