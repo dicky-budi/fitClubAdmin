@@ -53,8 +53,17 @@ function appendClassTable(data){
             '<td>'+element.id+'</td>'+
             '<td>'+element.name+'</td>'+
             '<td>'+element.descript+'</td>'+
+            '<td><a href="#modals"><button class="btn-primary btn-animated deleteClass" data-id='+element.id+' data-name="'+element.name+'">Delete</button></a></td>'
         '</tr>';
         row += rowData;
     });
     $('#classBody').append(row);
 }
+
+$(document).on('click','.deleteClass', async function(){
+    $(modal).insertAfter('.section');
+    var deleteModal = await axiosGetFile('/deleteClass');
+    $('.modal-title').html('Delete Class');
+    $('.modal-body').append(deleteModal);
+    $('.classDelete').html($(this).data('name'));
+});

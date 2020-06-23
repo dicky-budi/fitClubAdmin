@@ -64,6 +64,9 @@ fastify.get('/:origin', async function (req, reply) {
     case 'addClass':
       reply.sendFile('layouts/class/addClass.html');
       break;
+    case 'deleteClass':
+      reply.sendFile('layouts/class/deleteClass.html');
+      break;
     default:
       break;
   }
@@ -93,7 +96,7 @@ fastify.post('/:origin', async function (req, reply) {
 });
 
 fastify.post('/submitClass', async function (req, reply) {
-  var redirectUrl = url + '/class/' + req.headers.token;
+  var redirectUrl = url + '/class/post/' + req.headers.token;
   var settings = {
       "async": true,
       "crossDomain": true,
@@ -254,7 +257,8 @@ fastify.get('/coach/class/schedule', async function (req, reply){
 });
 
 fastify.get('/class', async function (req, reply){
-  var redirectUrl = url + req.raw.url + '/' + req.headers.token
+  var redirectUrl = url + req.raw.url + '/get/' + req.headers.token
+  console.log('ru',redirectUrl);
   try{
     let data = {
       "async": true,
