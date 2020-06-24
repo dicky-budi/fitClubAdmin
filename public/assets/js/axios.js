@@ -16,6 +16,24 @@ async function axiosPost(url,data,option = '') {
     });
 }
 
+async function axiosDelete(url,data,option = '') {
+    return new Promise(async function (resolve, reject) {
+        axios({
+            method: 'delete',
+            url: url,
+            data: data,
+            headers: option
+        }).then((response) => {
+            if(response.responseCode == '401')
+                window.location.href= 'login';
+            else 
+                resolve(response.data);
+        }, (error) => {
+            reject(error);
+        });
+    });
+}
+
 async function axiosPut(url,data,option = '') {
     return new Promise(async function (resolve, reject) {
         axios({

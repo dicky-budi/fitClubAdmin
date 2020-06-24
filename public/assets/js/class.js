@@ -50,7 +50,7 @@ function appendClassTable(data){
     var row = '';
     data.forEach(element => {
         rowData = '<tr>' +
-            '<td>'+element.id+'</td>'+
+            // '<td>'+element.id+'</td>'+
             '<td>'+element.name+'</td>'+
             '<td>'+element.descript+'</td>'+
             '<td><a href="#modals"><button class="btn-primary btn-animated deleteClass" data-id='+element.id+' data-name="'+element.name+'">Delete</button></a></td>'
@@ -60,10 +60,29 @@ function appendClassTable(data){
     $('#classBody').append(row);
 }
 
-$(document).on('click','.deleteClass', async function(){
-    $(modal).insertAfter('.section');
-    var deleteModal = await axiosGetFile('/deleteClass');
-    $('.modal-title').html('Delete Class');
-    $('.modal-body').append(deleteModal);
-    $('.classDelete').html($(this).data('name'));
-});
+$(document).on('click','.deleteClass',function(){
+    let idClass = $(this).data('id');
+    callNotifDelete($(this).data('name'),async function(){
+        // console.log("woe");
+        await deleteClass(idClass);
+    });
+})
+
+async function deleteClass(id){
+    var deleteData = {
+        "classId": id,
+    };
+    console.log('del',deleteData);
+    var deleteClass = await axiosPost('deleteClass',deleteData,{
+        'token': localStorage.getItem('token'),
+    });
+    if(deleteClass.responseCode == '200'){
+        swalNotif('success','Success delete class');
+        returnedHTML = await axiosGetFile('/classPage');
+        clearAndReplaceContent(returnedHTML,$(this).data('target'));
+        addSpace();
+        await processClassData('classTable');
+    } else {
+        swalNotif('error','Delete Class Failed');
+    }
+}

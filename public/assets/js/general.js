@@ -24,6 +24,23 @@ function applyTimePicker(idname){
     });
 }
 
+function callNotifDelete(name,func) {
+    Swal.fire({
+        position: 'center',
+        type: 'warning',
+        title: 'Are you sure to delete ' + name + ' class ?',
+        showLoaderOnConfirm: true,
+        showCancelButton: true,
+        cancelButtonText: 'No!',
+        confirmButtonText: 'Yes!',
+        preConfirm: () => {
+            if(func != undefined && func != ''){
+                func();
+            }
+        },
+    })
+}
+
 function clearModal(){
     $('.modal-title').html('');
     $('.modal-body').empty();
