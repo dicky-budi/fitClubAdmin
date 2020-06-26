@@ -6,17 +6,19 @@ $(document).on('click','.createSchedule', async function(){
     var getCoach = await axiosGet('/coachlist','',{
         'token': localStorage.getItem('token'),
     });
-    var getPlace = await axiosGet('/place','',{
-        'token': 'x',
-    });
+    // var getPlace = await axiosGet('/place','',{
+    //     'token': 'x',
+    // });
     var scheduleForm = await axiosGetFile('/scheduleForm');
     $('.modal-title').html('Create Coach Schedule');
     $('.modal-body').append(scheduleForm);
     getClass.data.forEach(appendClass);
     getCoach.data.forEach(appendCoach);
-    getPlace.data.forEach(appendPlace);
+    // getPlace.data.forEach(appendPlace);
     applyTimePicker('startTime');
     applyTimePicker('endTime');
+
+    
 });
 
 $(document).on('click','.switchScheduleTag', async function(){
@@ -58,7 +60,8 @@ $(document).on('click','.submitSchedule', async function(){
     } else {
         splitAngkaEnd = splitEnd[0];
     }
-    var placeId = parseInt($('select#coachNameSchedule').val());
+    // var placeId = parseInt($('select#coachNameSchedule').val());
+    var placeId = JSON.parse(localStorage.getItem('loginData')).partnerId;
     var sendData = {
         "coachId": coachId,
         "classId": className,
@@ -99,6 +102,8 @@ $(document).on('click','.submitSwitchSchedule', async function(){
         "targetSchedule": destScheduleId,
         "targetCoach": destCoachId
     };
+
+    console.log('sendd',sendDataSwitch);
     loadingButtonWithDisabledForm('submitSwitchSchedule','LOADING...','.switchSchedule');
     var addSchedule = await axiosPut('switchSchedule',sendDataSwitch,{
         'token': localStorage.getItem('token'),

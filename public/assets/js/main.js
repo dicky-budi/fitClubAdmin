@@ -55,6 +55,7 @@ $(document).on('click','a', async function(){
                 returnedHTML = await axiosGetFile('/log');
                 clearAndReplaceContent(returnedHTML,$(this).data('target'));
                 addSpace();
+                await processMemberLog('memberLogData');
                 break;
         }
     }

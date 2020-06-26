@@ -64,6 +64,12 @@ fastify.get('/:origin', async function (req, reply) {
     case 'addClass':
       reply.sendFile('layouts/class/addClass.html');
       break;
+    case 'register':
+      reply.sendFile('layouts/register.html');
+      break;
+    case 'otp':
+      reply.sendFile('layouts/otp.html');
+      break;
     default:
       break;
   }
@@ -109,6 +115,52 @@ fastify.post('/submitClass', async function (req, reply) {
   }
   try {
     let a = await actionPost(settings);
+    reply.send(a);
+  } catch (err) {
+    reply.send(err)
+  }
+});
+
+fastify.post('/registerPartner', async function (req, reply) {
+  var redirectUrl = url + '/register';
+  var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": redirectUrl,
+      "method": "POST",
+      "headers": {
+          "Content-Type": "application/json",
+          "Accept": "*/*",
+          "Cache-Control": "no-cache",
+      },
+      "processData": false,
+      "body":JSON.stringify(req.body),
+  }
+  try {
+    let a = await actionPost(settings);
+    reply.send(a);
+  } catch (err) {
+    reply.send(err)
+  }
+});
+
+fastify.put('/registerOTP', async function (req, reply) {
+  var redirectUrl = url + '/otp';
+  var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": redirectUrl,
+      "method": "PUT",
+      "headers": {
+          "Content-Type": "application/json",
+          "Accept": "*/*",
+          "Cache-Control": "no-cache",
+      },
+      "processData": false,
+      "body":JSON.stringify(req.body),
+  }
+  try {
+    let a = await actionPut(settings);
     reply.send(a);
   } catch (err) {
     reply.send(err)
@@ -301,9 +353,29 @@ fastify.get('/class', async function (req, reply){
 });
 
 fastify.get('/coachlist', async function (req, reply){
-  // var redirectUrl = url + req.raw.url + '/' + req.headers.token
-  var redirectUrl = url + '/coach/1/' + req.headers.token
-  console.log('url',redirectUrl);
+  var redirectUrl = url + req.raw.url + '/' + req.headers.token
+  try{
+    let data = {
+      "async": true,
+      "crossDomain": true,
+      "url": redirectUrl,
+      "method": "GET",
+      "headers": {
+        "Accept": "*/*",
+        "Cache-Control": "no-cache",
+        "Content-type":'application/json'
+      }
+    }
+    let a = await actionGet(data);
+    reply.send(a);
+  }catch(err){
+    console.log("error apa", err);
+    reply.send(500);
+  }
+});
+
+fastify.get('/class/memberClass/history', async function (req, reply){
+  var redirectUrl = url + req.raw.url + '/' + req.headers.token
   try{
     let data = {
       "async": true,
