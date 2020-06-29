@@ -126,8 +126,11 @@ $(document).on('click','.submitSwitchSchedule', async function(){
 
 async function processScheduleData(classname){
     appendLoading(classname);
+    var placeId = JSON.parse(localStorage.getItem('loginData')).partnerId;
     var scheduleData = await axiosGet('class/schedule','',{
         'token': localStorage.getItem('token'),
+        'place':placeId
+
     }); 
     // jgn lupa diganti nanti if operatornya
     if(scheduleData.responseCode == '200'){

@@ -249,7 +249,9 @@ fastify.get('/class/schedule', async function (req, reply){
       "headers": {
         "Accept": "*/*",
         "Cache-Control": "no-cache",
-        "Content-type":'application/json'
+        "Content-type":'application/json',
+        "filter": "byPlace",
+        "place": req.headers.place
       }
     }
     let a = await actionGet(data);
@@ -353,7 +355,7 @@ fastify.get('/class', async function (req, reply){
 });
 
 fastify.get('/coachlist', async function (req, reply){
-  var redirectUrl = url + req.raw.url + '/' + req.headers.token
+  var redirectUrl = url + '/coach/{"byPlace":"'+req.headers.placeid+'"}/' + req.headers.token
   try{
     let data = {
       "async": true,
@@ -385,7 +387,9 @@ fastify.get('/class/memberClass/history', async function (req, reply){
       "headers": {
         "Accept": "*/*",
         "Cache-Control": "no-cache",
-        "Content-type":'application/json'
+        "Content-type":'application/json',
+        "request": "byPlace",
+        "placeId": req.headers.place
       }
     }
     let a = await actionGet(data);
