@@ -19,26 +19,27 @@ async function processMemberLog(classname){
 }
 
 async function appendMemberLog(data){
+    $('.memberLogData').empty();
+    $('.memberLogData').html('');
     var row = '';
-    var rowData = '';
-    
+    row = '<div class="row">';
     data.forEach(element => {
-        row = '<div class="row">';
-        rowData += '<div class="col-6">'+
+        var timeDifference = moment(element.startDate).fromNow();
+        var rowData = '';
+        rowData += '<div class="col-4">'+
             '<div class="tile">'+
             '<div class="tile__icon"><figure class="avatar">'+
-            '<img src="https://www.seoclerk.com/pics/319222-1IvI0s1421931178.png">'+
+            '<img src="https://f0.pngfuel.com/png/981/645/default-profile-picture-png-clip-art-thumbnail.png">'+
             '</figure></div>'+
             '<div class="tile__container">'+
             '<p class="tile__title u-no-margin">'+element.memberId+'</p>'+
-            '<p class="tile__subtitle u-no-margin">'+element.className+'</p>'+
-            '<span class="info">23 minutes ago</span>'
+            '<p class="tile__subtitle u-no-margin">'+element.className+' by coach '+element.coachName+'</p>'+
+            '<span class="info">'+timeDifference+'</span>'+
             '</div>'+
             '</div>'+
             '</div>';
         row += rowData;
-        row += '</div>';
     });
-    
+    row += '</div>';
     $('.memberLogData').append(row);
 }
