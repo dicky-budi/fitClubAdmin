@@ -5,6 +5,7 @@ $(document).on('click','.createSchedule', async function(){
     });
     var getCoach = await axiosGet('/coachlist','',{
         'token': localStorage.getItem('token'),
+        'placeid': JSON.parse(localStorage.getItem('loginData')).partnerId
     });
     // var getPlace = await axiosGet('/place','',{
     //     'token': 'x',
