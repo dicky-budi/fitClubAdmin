@@ -35,7 +35,7 @@ async function appendMemberLog(data){
             '<img src="https://f0.pngfuel.com/png/981/645/default-profile-picture-png-clip-art-thumbnail.png">'+
             '</figure></div>'+
             '<div class="tile__container">'+
-            '<p class="tile__title u-no-margin">'+element.memberId+'</p>'+
+            '<p class="tile__title u-no-margin">'+element.memberName+'</p>'+
             '<p class="tile__subtitle u-no-margin">'+element.className+' ( '+element.coachName+' )</p>'+
             '<span class="info">'+timeDifference+'</span>'+
             '</div>'+
