@@ -1,5 +1,6 @@
 $(document).on('click','.createSchedule', async function(){
     $(modal).insertAfter('.section');
+    appendLoading('contentPlace');
     var getClass = await axiosGet('/class','',{
         'token': localStorage.getItem('token'),
     });
@@ -7,19 +8,18 @@ $(document).on('click','.createSchedule', async function(){
         'token': localStorage.getItem('token'),
         'placeid': JSON.parse(localStorage.getItem('loginData')).partnerId
     });
-    // var getPlace = await axiosGet('/place','',{
-    //     'token': 'x',
-    // });
+    var getPlace = await axiosGet('/place','',{
+        'token': localStorage.getItem('token'),
+    });
+    removeLoading('contentPlace');
     var scheduleForm = await axiosGetFile('/scheduleForm');
     $('.modal-title').html('Create Coach Schedule');
     $('.modal-body').append(scheduleForm);
     getClass.data.forEach(appendClass);
     getCoach.data.forEach(appendCoach);
-    // getPlace.data.forEach(appendPlace);
+    getPlace.data.forEach(appendPlace);
     applyTimePicker('startTime');
     applyTimePicker('endTime');
-
-    
 });
 
 $(document).on('click','.switchScheduleTag', async function(){
@@ -157,7 +157,6 @@ function appendScheduleTable(data){
                 rowData += '<td>'+moment(element.startDate).format('DD MMMM YYYY')+' - '+moment(element.endDate).format('DD MMMM YYYY')+' </td>';
             }
             rowData += '<td>'+element.startTime+' - '+element.endTime+' </td>'+
-            '<td><i class="material-icons">check</i></td>'+
         '</tr>';
         row += rowData;
     });
@@ -188,6 +187,7 @@ function appendClass(data,index){
 }
 
 function appendCoach(data,index){
+    console.log('data coach',data);
     var tag = '<option value='+data.id+'>'+data.name+'</option>';
     $('.coachNameSchedule').append(tag);
 }

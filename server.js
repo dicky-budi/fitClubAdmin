@@ -27,7 +27,7 @@ fastify.register(fastifyHelmet)
   });
 const io = require('socket.io')(fastify.server);
 
-var url = 'http://localhost:8888/ronaldSengkey/fitClub/api/v1';
+var url = 'http://c3cfbc8ba471.ngrok.io/ronaldSengkey/fitClub/api/v1';
 
 fastify.get('/:origin', async function (req, reply) {
   switch (req.params.origin){
@@ -286,7 +286,7 @@ fastify.get('/classList', async function (req, reply){
 });
 
 fastify.get('/place', async function (req, reply){
-  var redirectUrl = url + req.raw.url + '/' + req.headers.token
+  var redirectUrl = url + req.raw.url
   try{
     let data = {
       "async": true,
@@ -296,7 +296,8 @@ fastify.get('/place', async function (req, reply){
       "headers": {
         "Accept": "*/*",
         "Cache-Control": "no-cache",
-        "Content-type":'application/json'
+        "Content-type":'application/json',
+        "token" : req.headers.token
       }
     }
     let a = await actionGet(data);

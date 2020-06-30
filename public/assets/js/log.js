@@ -24,9 +24,10 @@ async function appendMemberLog(data){
     var row = '';
     row = '<div class="row">';
     data.forEach(element => {
-        var momentObj = moment(moment(element.startDate).format(moment.HTML5_FMT.DATE) + element.startTime, 'YYYY-MM-DDLT');
-        var dateTime = momentObj.format('YYYY-MM-DDTHH:mm:ss');
-        var timeDifference = moment(dateTime).fromNow();
+        // var momentObj = moment(moment(element.startDate).format(moment.HTML5_FMT.DATE) + element.startTime, 'YYYY-MM-DDLT');
+        // var dateTime = momentObj.format('YYYY-MM-DDTHH:mm:ss');
+        // var timeDifference = moment(dateTime).fromNow();
+        var timeDifference = moment(element.dateRecord).fromNow();
 
         var rowData = '';
         rowData += '<div class="col-4">'+
