@@ -24,7 +24,10 @@ async function appendMemberLog(data){
     var row = '';
     row = '<div class="row">';
     data.forEach(element => {
-        var timeDifference = moment(element.startDate).fromNow();
+        var momentObj = moment(moment(element.startDate).format(moment.HTML5_FMT.DATE) + element.startTime, 'YYYY-MM-DDLT');
+        var dateTime = momentObj.format('YYYY-MM-DDTHH:mm:ss');
+        var timeDifference = moment(dateTime).fromNow();
+
         var rowData = '';
         rowData += '<div class="col-4">'+
             '<div class="tile">'+
@@ -33,7 +36,7 @@ async function appendMemberLog(data){
             '</figure></div>'+
             '<div class="tile__container">'+
             '<p class="tile__title u-no-margin">'+element.memberId+'</p>'+
-            '<p class="tile__subtitle u-no-margin">'+element.className+' by coach '+element.coachName+'</p>'+
+            '<p class="tile__subtitle u-no-margin">'+element.className+' ( '+element.coachName+' )</p>'+
             '<span class="info">'+timeDifference+'</span>'+
             '</div>'+
             '</div>'+
