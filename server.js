@@ -27,7 +27,8 @@ fastify.register(fastifyHelmet)
   });
 const io = require('socket.io')(fastify.server);
 
-var url = 'http://c3cfbc8ba471.ngrok.io/ronaldSengkey/fitClub/api/v1';
+// var url = 'http://c3cfbc8ba471.ngrok.io/ronaldSengkey/fitClub/api/v1';
+var url = 'http://localhost:8888/ronaldSengkey/fitClub/api/v1';
 
 fastify.get('/:origin', async function (req, reply) {
   switch (req.params.origin){

@@ -61,8 +61,8 @@ $(document).on('click','.submitSchedule', async function(){
     } else {
         splitAngkaEnd = splitEnd[0];
     }
-    // var placeId = parseInt($('select#coachNameSchedule').val());
-    var placeId = JSON.parse(localStorage.getItem('loginData')).partnerId;
+    var placeId = parseInt($('select#coachNameSchedule').val());
+    // var placeId = JSON.parse(localStorage.getItem('loginData')).partnerId;
     var sendData = {
         "coachId": coachId,
         "classId": className,
@@ -187,7 +187,6 @@ function appendClass(data,index){
 }
 
 function appendCoach(data,index){
-    console.log('data coach',data);
     var tag = '<option value='+data.id+'>'+data.name+'</option>';
     $('.coachNameSchedule').append(tag);
 }

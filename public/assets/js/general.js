@@ -56,10 +56,15 @@ function clearModalSwitch(){
 function applyDataTable(classname){
     $('.'+classname).DataTable({
         "responsive": true,
-        "searching": false,
-        "info" : false,
+        // "searching": false,
+        // "info" : false,
+        "buttons": [
+            'excel'
+        ],
+        "dom": 'Bfrtip',
         "paging": false,
         "autoWidth": false,
+        
     });
     $('.'+classname).parent().css('min-width','100%');
     $('.dataTable thead').addClass('bg-warning-light');
