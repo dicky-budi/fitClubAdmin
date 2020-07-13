@@ -62,13 +62,15 @@ function applyDataTable(classname){
             'excel'
         ],
         "dom": 'Bfrtip',
-        "paging": false,
-        "autoWidth": false,
+        "paging": true,
+        "pageLength": 10,
+        "autoWidth": true,
         
     });
     $('.'+classname).parent().css('min-width','100%');
     $('.dataTable thead').addClass('bg-warning-light');
     $('.dataTable tfoot').addClass('bg-warning-light');
+    $('.pagination').children().css('margin-right','2rem')
 }
 
 function appendLoading(classname){
