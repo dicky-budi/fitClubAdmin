@@ -71,6 +71,9 @@ function applyDataTable(classname){
     $('.dataTable thead').addClass('bg-warning-light');
     $('.dataTable tfoot').addClass('bg-warning-light');
     $('.pagination').children().css('margin-right','2rem')
+    $('.'+classname).on( 'draw.dt', function () {
+        $('.pagination').children().css('margin-right','2rem')
+    } );
 }
 
 function appendLoading(classname){
