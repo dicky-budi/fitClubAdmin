@@ -20,6 +20,9 @@ $(document).on('click','a', async function(){
             case "employeelog":
                 await processEmployeeLog('employeeLogData')
                 break;
+            case "memberApproval":
+                await processMemberApproval('memberApprovalData');
+                break;
             default:
                 break;
         }
@@ -56,6 +59,7 @@ $(document).on('click','a', async function(){
                 clearAndReplaceContent(returnedHTML,$(this).data('target'));
                 addSpace();
                 await processMemberLog('memberLogData');
+                await processMemberApproval('memberApprovalData');
                 break;
         }
     }

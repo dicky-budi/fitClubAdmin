@@ -6,7 +6,7 @@ $(document).on('click','.login', async function(){
         "email" : email,
         "password" : password
     }
-    var loginResponse = await axiosPost($(this).val(),data);
+    var loginResponse = await axiosPost($(this).val()+'/partner',data);
     if(loginResponse.responseCode == '200'){
         storageSet('loginData',JSON.stringify(loginResponse.data));
         storageSet('token',loginResponse.data.accessToken);

@@ -28,7 +28,7 @@ fastify.register(fastifyHelmet)
 const io = require('socket.io')(fastify.server);
 
 // var url = 'http://c3cfbc8ba471.ngrok.io/ronaldSengkey/fitClub/api/v1';
-var url = 'http://localhost:8888/ronaldSengkey/fitClub/api/v1';
+var url = 'http://192.168.0.22:8888/ronaldSengkey/fitClub/api/v1';
 
 fastify.get('/:origin', async function (req, reply) {
   switch (req.params.origin){
@@ -77,7 +77,32 @@ fastify.get('/:origin', async function (req, reply) {
 });
 
 fastify.post('/:origin', async function (req, reply) {
+  console.log('re',url);
   var redirectUrl = url + '/' + req.params.origin;
+  console.log('re',redirectUrl);
+  var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": redirectUrl,
+      "method": "POST",
+      "headers": {
+          "Content-Type": "application/json",
+          "Accept": "*/*",
+          "Cache-Control": "no-cache",
+      },
+      "processData": false,
+      "body":JSON.stringify(req.body),
+  }
+  try {
+    let a = await actionPost(settings);
+    reply.send(a);
+  } catch (err) {
+    reply.send(err)
+  }
+});
+
+fastify.post('/login/partner', async function (req, reply) {
+  var redirectUrl = url + req.raw.url;
   var settings = {
       "async": true,
       "crossDomain": true,
@@ -262,6 +287,52 @@ fastify.get('/class/schedule', async function (req, reply){
     reply.send(500);
   }
 });
+
+fastify.get('/partner/member/membershipRequest', async function (req, reply){
+  var redirectUrl = url + req.raw.url + '/' + req.headers.token
+  try{
+    let data = {
+      "async": true,
+      "crossDomain": true,
+      "url": redirectUrl,
+      "method": "GET",
+      "headers": {
+        "Accept": "*/*",
+        "Cache-Control": "no-cache",
+        "Content-type":'application/json',
+      }
+    }
+    let a = await actionGet(data);
+    reply.send(a);
+  }catch(err){
+    console.log("error apa", err);
+    reply.send(500);
+  }
+});
+
+fastify.post('/partner/member/memberActivation', async function (req, reply) {
+  var redirectUrl = url + req.raw.url + '/' + req.headers.token;
+  var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": redirectUrl,
+      "method": "POST",
+      "headers": {
+          "Content-Type": "application/json",
+          "Accept": "*/*",
+          "Cache-Control": "no-cache",
+      },
+      "processData": false,
+      "body":JSON.stringify(req.body),
+  }
+  try {
+    let a = await actionPost(settings);
+    reply.send(a);
+  } catch (err) {
+    reply.send(err)
+  }
+});
+
 
 fastify.get('/classList', async function (req, reply){
   var redirectUrl = url + req.raw.url + '/' + req.headers.token
