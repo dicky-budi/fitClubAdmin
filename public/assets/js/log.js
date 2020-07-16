@@ -72,8 +72,8 @@ async function appendMemberApproval(data){
             '<p class="tile__title u-no-margin">'+element.memberName+'</p>'+
             '<p class="tile__subtitle u-no-margin">Apply level : '+element.memberCategory+'</p>'+
             '<span class="info">'+timeDifference+'</span>'+
-            '<div class="row"><div class="col-6"><button class="btn-success btn-small responseApproval" data-type="accept" data-load="memberApprovalData" data-place='+element.placeId+' data-id='+element.userId+' data-code='+element.code+' >Accept</button></div>'+
-            '<div class="col-6"><button class="btn-danger btn-small responseApproval" data-type="reject" data-load="memberApprovalData" data-place='+element.placeId+' data-id='+element.userId+' data-code='+element.code+'>Reject</button></div></div>'+
+            '<div class="row"><div class="col-6"><button class="btn-success btn-small responseApproval" data-transaction='+element.transactionId+' data-payment='+element.paymentVia+' data-bank='+element.bankId+' data-member='+element.memberCat+' data-nominal='+element.nominal+' data-type="accept" data-load="memberApprovalData" data-place='+element.placeId+' data-id='+element.userId+' data-code='+element.code+' >Accept</button></div>'+
+            '<div class="col-6"><button class="btn-danger btn-small responseApproval" data-transaction='+element.transactionId+' data-payment='+element.paymentVia+' data-bank='+element.bankId+' data-member='+element.memberCat+' data-nominal='+element.nominal+' data-type="reject" data-load="memberApprovalData" data-place='+element.placeId+' data-id='+element.userId+' data-code='+element.code+'>Reject</button></div></div>'+
             '</div>'+
             '</div>'+
             '</div>';
@@ -84,16 +84,25 @@ async function appendMemberApproval(data){
 }
 
 $(document).on('click','.responseApproval',async function(){
-    console.log($(this).data('type'));
+    appendLoading($(this).data('load'));
     let userId = $(this).data('id');
     let code = $(this).data('code');
     let placeId = $(this).data('place');
-    appendLoading($(this).data('load'));
+    let nominal = $(this).data('nominal');
+    let member = $(this).data('member');
+    let bank = $(this).data('bank');
+    let payment = $(this).data('payment');
+    let transaction = $(this).data('transaction');
     let bodyData = {
         "userId": parseInt(userId),
         "memberCode": parseInt(code),
         "placeId": parseInt(placeId),
-        "status": $(this).data('type') == 'accept' ? 1 : 0
+        "status": $(this).data('type') == 'accept' ? 1 : 0,
+        "nominal": parseInt(nominal),
+        "memberCat": parseInt(member),
+        "bankId": parseInt(bank),
+        "paymentMethod": payment,
+        "transactionId": parseInt(transaction)
     }
     var approveResponseLog = await axiosPost('/partner/member/memberActivation',bodyData,{
         'token': localStorage.getItem('token')
