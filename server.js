@@ -77,9 +77,7 @@ fastify.get('/:origin', async function (req, reply) {
 });
 
 fastify.post('/:origin', async function (req, reply) {
-  console.log('re',url);
   var redirectUrl = url + '/' + req.params.origin;
-  console.log('re',redirectUrl);
   var settings = {
       "async": true,
       "crossDomain": true,

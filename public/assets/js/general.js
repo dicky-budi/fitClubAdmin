@@ -104,9 +104,13 @@ function removeLoadingWithError(classname){
 }
 
 function addRefreshButton(classname){
-    var colspanCount = $('.'+classname).find('thead:first-child tr')[0].childElementCount;
-    var tbody = $('.'+classname).find('tbody').attr('id');
-    $('<tr class="refreshButton" data-refresh="'+classname+'"><td colspan='+colspanCount+'><a href="#"><button class="btn-large" style="width:25%; margin:0 auto;"><i class="fa-wrapper fa fa-sync pad-right"></i>REFRESH</button></a></td></tr>').appendTo('#'+tbody);
+    try{
+        var colspanCount = $('.'+classname).find('thead:first-child tr')[0].childElementCount;
+        var tbody = $('.'+classname).find('tbody').attr('id');
+        $('<tr class="refreshButton" data-refresh="'+classname+'"><td colspan='+colspanCount+'><a href="#"><button class="btn-large" style="width:25%; margin:0 auto;"><i class="fa-wrapper fa fa-sync pad-right"></i>REFRESH</button></a></td></tr>').appendTo('#'+tbody);
+    }catch(e){
+
+    }
 }
 
 function toast(type,text,classname){
