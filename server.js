@@ -27,6 +27,7 @@ fastify.register(fastifyHelmet)
   });
 const io = require('socket.io')(fastify.server);
 
+// url service
 // var url = 'http://c3cfbc8ba471.ngrok.io/ronaldSengkey/fitClub/api/v1';
 var url = 'http://fitclubdev.zapto.org:8888/ronaldSengkey/fitClub/api/v1';
 
