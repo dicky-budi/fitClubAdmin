@@ -41,6 +41,23 @@ function callNotifDelete(name,func) {
     })
 }
 
+function callNotifDeleteCustomText(func,text) {
+    Swal.fire({
+        position: 'center',
+        type: 'warning',
+        title: text,
+        showLoaderOnConfirm: true,
+        showCancelButton: true,
+        cancelButtonText: 'No!',
+        confirmButtonText: 'Yes!',
+        preConfirm: () => {
+            if(func != undefined && func != ''){
+                func();
+            }
+        },
+    })
+}
+
 function clearModal(){
     $('.modal-title').html('');
     $('.modal-body').empty();
@@ -54,6 +71,9 @@ function clearModalSwitch(){
 }
 
 function applyDataTable(classname){
+    if ($.fn.DataTable.isDataTable( '.'+classname )) {
+        $('.'+classname).DataTable().destroy();
+    }
     $('.'+classname).DataTable({
         "responsive": true,
         // "searching": false,

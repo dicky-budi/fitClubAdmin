@@ -28,8 +28,8 @@ fastify.register(fastifyHelmet)
 const io = require('socket.io')(fastify.server);
 
 // url service
-// var url = 'http://c3cfbc8ba471.ngrok.io/ronaldSengkey/fitClub/api/v1';
 var url = 'http://fitclubdev.zapto.org:8888/ronaldSengkey/fitClub/api/v1';
+// var url = 'http://192.168.0.22:8888/ronaldSengkey/fitClub/api/v1';
 
 fastify.get('/:origin', async function (req, reply) {
   switch (req.params.origin){
@@ -47,6 +47,12 @@ fastify.get('/:origin', async function (req, reply) {
       break;
     case 'classPage':
       reply.sendFile('layouts/class/classList.html');
+      break;
+    case 'bodyProgress':
+      reply.sendFile('layouts/bodyProgress/bodyProgressList.html');
+      break;
+    case 'addBodyProgress':
+      reply.sendFile('layouts/bodyProgress/addBodyProgress.html');
       break;
     case 'schedule':
       reply.sendFile('layouts/schedule/scheduleList.html');
@@ -356,6 +362,78 @@ fastify.get('/classList', async function (req, reply){
   }
 });
 
+fastify.get('/bodyProgressData', async function (req, reply){
+  var redirectUrl = url + '/member/personalRecord/category/'+ req.headers.token
+  try{
+    let data = {
+      "async": true,
+      "crossDomain": true,
+      "url": redirectUrl,
+      "method": "GET",
+      "headers": {
+        "Accept": "*/*",
+        "Cache-Control": "no-cache",
+        "Content-type":'application/json',
+      }
+    }
+    let a = await actionGet(data);
+    reply.send(a);
+  }catch(err){
+    console.log("error apa", err);
+    reply.send(500);
+  }
+});
+
+fastify.post('/submitBodyProgress', async function (req, reply) {
+  var redirectUrl = url + '/member/personalRecord/category/'+ req.headers.token
+  var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": redirectUrl,
+      "method": "POST",
+      "headers": {
+          "Content-Type": "application/json",
+          "Accept": "*/*",
+          "Cache-Control": "no-cache",
+      },
+      "processData": false,
+      "body":JSON.stringify(req.body),
+  }
+  try {
+    console.log('set',settings);
+    let a = await actionPost(settings);
+    console.log('set a',a);
+    reply.send(a);
+  } catch (err) {
+    reply.send(err)
+  }
+});
+
+fastify.delete('/deleteBodyProgress', async function (req, reply) {
+  var redirectUrl = url + '/member/personalRecord/category/'+ req.headers.token
+  var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": redirectUrl,
+      "method": "DELETE",
+      "headers": {
+          "Content-Type": "application/json",
+          "Accept": "*/*",
+          "Cache-Control": "no-cache",
+      },
+      "processData": false,
+      "body":JSON.stringify(req.body),
+  }
+  try {
+    console.log('set delete',settings);
+    let a = await actionDelete(settings);
+    console.log('set a delete',a);
+    reply.send(a);
+  } catch (err) {
+    reply.send(err)
+  }
+});
+
 fastify.get('/place', async function (req, reply){
   var redirectUrl = url + req.raw.url
   try{
@@ -524,6 +602,25 @@ function actionGet(data) {
       })
     } catch (err) {
       console.log("error action get", err);
+      reject(process.env.ERRORINTERNAL_RESPONSE);
+    }
+  })
+}
+
+function actionDelete(data) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let settings = data;
+      r.delete(settings, function (error, response, body) {
+        if (error) {
+          reject(process.env.ERRORINTERNAL_RESPONSE);
+        } else {
+          let result = JSON.parse(body);
+          resolve(result);
+        }
+      })
+    } catch (err) {
+      console.log("error action delete", err);
       reject(process.env.ERRORINTERNAL_RESPONSE);
     }
   })

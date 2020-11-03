@@ -23,6 +23,9 @@ $(document).on('click','a', async function(){
             case "memberApproval":
                 await processMemberApproval('memberApprovalData');
                 break;
+            case "bodyProgressData":
+                await processBodyProgressData('bodyProgressTable');
+                break;
             default:
                 break;
         }
@@ -47,6 +50,12 @@ $(document).on('click','a', async function(){
                 clearAndReplaceContent(returnedHTML,$(this).data('target'));
                 addSpace();
                 await processClassData('classTable');
+                break;
+            case "bodyProgress":
+                returnedHTML = await axiosGetFile('/bodyProgress');
+                clearAndReplaceContent(returnedHTML,$(this).data('target'));
+                addSpace();
+                await processBodyProgressData('bodyProgressTable');
                 break;
             case "employee":
                 returnedHTML = await axiosGetFile('/employee');
