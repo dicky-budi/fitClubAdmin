@@ -39,7 +39,7 @@
     "readable-stream": "^3.4.0",
     "redis": "^2.8.0",
     "request": "^2.88.0",
-    "socket.io": "^2.3.0",
+    "socket.io": "^2.5.0",
     "under-pressure": "^3.1.0"
   }
 }
